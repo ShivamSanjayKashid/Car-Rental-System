@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head"></head>
+<body>
+    <div th:fragment="content">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="text-center">Rent a Car</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-4">
+                            <h5 th:text="${car.make + ' ' + car.model}" class="card-title"></h5>
+                            <p class="card-text" th:text="'Year: ' + ${car.year}"></p>
+                        </div>
+                        <form th:action="@{/rent/{carId}(carId=${car.id})}" method="post">
+                            <div class="mb-3">
+                                <label for="rentalDate" class="form-label">Rental Date</label>
+                                <input type="date" class="form-control" id="rentalDate" name="rentalDate" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="returnDate" class="form-label">Return Date</label>
+                                <input type="date" class="form-control" id="returnDate" name="returnDate" required>
+                            </div>
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary">Confirm Rental</button>
+                                <a href="/" class="btn btn-secondary">Cancel</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

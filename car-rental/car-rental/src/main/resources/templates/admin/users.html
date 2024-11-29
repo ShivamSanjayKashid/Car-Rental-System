@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head"></head>
+<body>
+    <div th:fragment="content">
+        <h2>Users with Rentals</h2>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Active Rentals</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="user : ${users}">
+                        <td th:text="${user.username}"></td>
+                        <td th:text="${user.email}"></td>
+                        <td>
+                            <ul>
+                                <li th:each="rental : ${user.rentals}" 
+                                    th:if="${rental.status == T(com.example.carrental.Entity.Rental.RentalStatus).APPROVED}">
+                                    <span th:text="${rental.car.make + ' ' + rental.car.model}"></span>
+                                    (<span th:text="${rental.rentalDate}"></span> - 
+                                    <span th:text="${rental.returnDate}"></span>)
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html> 
